@@ -18,7 +18,7 @@ st.set_page_config(
 st.title("🏥 Healthcare Data Insights Dashboard")
 st.markdown("Analyze patient admissions, doctor performance, and hospital financials interactively.")
 # --------------------------
-# 📊 GLOBAL SIDEBAR FILTERS
+# GLOBAL SIDEBAR FILTERS
 # --------------------------
 st.sidebar.header("🔍 Global Filters")
 
@@ -45,7 +45,7 @@ selected_diagnosis = st.sidebar.multiselect("Select Diagnosis", diagnosis_option
 bed_options = sorted(main_df["Bed_Occupancy"].dropna().unique().tolist())
 selected_beds = st.sidebar.multiselect("Select Bed Type(s)", bed_options, default=bed_options)
 
-# ✅ Apply filters
+#  Apply filters
 filtered_df = main_df[
     (main_df["Admit_Date"].between(pd.to_datetime(date_range[0]), pd.to_datetime(date_range[1]))) &
     (main_df["Doctor"].isin(selected_doctors)) &
@@ -373,7 +373,7 @@ with tab5:
     st.subheader("🏥 Hospital Overview")
     st.markdown("A comprehensive summary of hospital performance, revenue, and patient experience.")
 
-    # --- 1️⃣ Key KPIs ---
+    # --- 1️ Key KPIs ---
     total_patients = len(filtered_df["Patient_ID"].unique())
     total_revenue = filtered_df["Billing Amount"].sum()
     avg_stay = filtered_df["Length_of_Stay"].mean()
@@ -387,7 +387,7 @@ with tab5:
 
     st.markdown("---")
 
-    # --- 2️⃣ Revenue by Diagnosis ---
+    # --- 2️ Revenue by Diagnosis ---
     df_rev = (
         filtered_df.groupby("Diagnosis")["Billing Amount"]
         .sum()
@@ -403,7 +403,7 @@ with tab5:
     )
     st.plotly_chart(fig_rev, use_container_width=True)
 
-    # --- 3️⃣ Correlation: Length of Stay vs Billing ---
+    # --- 3️ Correlation: Length of Stay vs Billing ---
     fig_corr = px.scatter(
         filtered_df,
         x="Length_of_Stay", y="Billing Amount",
@@ -413,7 +413,7 @@ with tab5:
     )
     st.plotly_chart(fig_corr, use_container_width=True)
 
-    # --- 4️⃣ Insurance Coverage Overview ---
+    # --- 4️ Insurance Coverage Overview ---
     df_ins = (
         filtered_df.groupby("Health Insurance Amount")["Billing Amount"]
         .sum()
@@ -427,7 +427,7 @@ with tab5:
     )
     st.plotly_chart(fig_ins, use_container_width=True)
 
-    # --- 5️⃣ Summary Insight ---
+    # --- 5️ Summary Insight ---
     st.markdown("### 📊 Summary Insights")
     if not filtered_df.empty:
         top_diagnosis = df_rev.iloc[0]["Diagnosis"]
