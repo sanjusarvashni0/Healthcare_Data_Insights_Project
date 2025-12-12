@@ -12,7 +12,6 @@ Hospitals handle huge amounts of appointment and patient data, but without prope
 
 * Peak visit times
 * Department load
-* No-show patterns
 * Payment trends
 * Patient demographics
 
